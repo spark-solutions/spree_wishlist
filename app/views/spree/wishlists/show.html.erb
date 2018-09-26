@@ -1,12 +1,15 @@
 <div id="wishlist_header">
-  <h1><%= @wishlist.name %></h1>
+  <h1>
+    <%= @wishlist.name %>
+  </h1>
   <% if @wishlist.user == spree_current_user %>
     <div id="manage_wishlist_links">
-      <%= link_to Spree.t(:edit_wishlist), edit_wishlist_path(@wishlist), class: 'button' %>
+      <%= link_to Spree.t(:edit_wishlist), edit_wishlist_path(@wishlist), class: 'btn btn-primary' %>
     </div>
     <div><%= render partial: 'accessibility' %></div>
   <% end -%>
 </div>
+
 <table id="wishlist" class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -30,7 +33,9 @@
     <tr class="<%= cycle('', 'alt') %>">
     <% if @wishlist.user == spree_current_user %>
       <td>
-        <p><%= link_to Spree.t(:remove_from_wishlist), wish, method: :delete, class: 'btn btn-danger' %></p>
+        <p>
+          <%= link_to Spree.t(:remove_from_wishlist), wish, method: :delete, class: 'btn btn-danger' %>
+        </p>
         <%= form_for :order, url: populate_orders_url do |f| %>
           <%= hidden_field_tag 'variant_id', variant.id, size: 3 %>
           <%= Spree.t(:quantity) %>
@@ -87,11 +92,11 @@
   </tbody>
 </table>
 <div class="footer_links" data-hook="wishlist_footer_links">
-<% if @wishlist.user == spree_current_user %>
-  <%= link_to Spree.t(:create_new_wishlist), new_wishlist_path, class: 'btn btn-default' %>
-<% end -%>
-<%= link_to Spree.t(:continue_shopping), products_path, class: 'btn btn-default' %>
-<% if respond_to?(:email_to_friend_url) %>
-  <%= link_to Spree.t('email_to_friend.send_to_friend'), email_to_friend_url('wishlist', @wishlist), class: 'btn btn-default' %>
-<% end %>
+  <% if @wishlist.user == spree_current_user %>
+    <%= link_to Spree.t(:create_new_wishlist), new_wishlist_path, class: 'btn btn-default' %>
+  <% end -%>
+  <%= link_to Spree.t(:continue_shopping), products_path, class: 'btn btn-default' %>
+  <% if respond_to?(:email_to_friend_url) %>
+    <%= link_to Spree.t('email_to_friend.send_to_friend'), email_to_friend_url('wishlist', @wishlist), class: 'btn btn-default' %>
+  <% end %>
 </div>
